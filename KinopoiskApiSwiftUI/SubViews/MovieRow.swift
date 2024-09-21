@@ -15,6 +15,10 @@ struct MovieRow: View {
         HStack {
             KFImage(URL(string: movie.poster?.url ?? ""))
                 .resizable()
+                .placeholder {
+                    ProgressView()
+                        .frame(width: 60, height: 60)
+                }
                 .aspectRatio(contentMode: .fit)
                 .frame(width: 60, height: 90)
                 .cornerRadius(8)
