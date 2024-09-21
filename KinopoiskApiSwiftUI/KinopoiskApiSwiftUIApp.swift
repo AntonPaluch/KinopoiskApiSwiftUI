@@ -10,11 +10,14 @@ import SwiftUI
 @main
 struct KinopoiskApiSwiftUIApp: App {
     let persistenceController = PersistenceController.shared
-
+    @StateObject private var router = Router()
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            MainTabView()
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
+                .environmentObject(router)
+                .environmentObject(AlertManager.shared)
         }
     }
 }
