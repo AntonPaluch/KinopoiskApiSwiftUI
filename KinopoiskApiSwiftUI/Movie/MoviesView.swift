@@ -46,6 +46,9 @@ struct MoviesView: View {
                     MovieDetailView(movie: movie, networkService: networkService)
                 }
             }
+            .refreshable {
+                await viewModel.loadMovies(refresh: true)
+            }
             .alert(isPresented: $alertManager.showAlert) {
                 Alert(
                     title: Text(alertManager.alertTitle),

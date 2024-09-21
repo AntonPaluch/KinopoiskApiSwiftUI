@@ -32,7 +32,13 @@ class MoviesViewModel: ObservableObject {
     }
     
     @MainActor
-    func loadMovies() async {
+    func loadMovies(refresh: Bool = false) async {
+        
+        if refresh {
+            currentPage = 1
+            movies.removeAll()
+        }
+        
         guard !isLoading else { return }
         isLoading = true
         
