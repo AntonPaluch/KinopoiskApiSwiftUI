@@ -10,7 +10,12 @@ import Kingfisher
 
 struct MovieDetailView: View {
     let movie: Doc
-    @StateObject private var viewModel = MovieDetailViewModel()
+    @StateObject private var viewModel: MovieDetailViewModel
+    
+    init(movie: Doc, networkService: NetworkServiceProtocol) {
+        self.movie = movie
+        _viewModel = StateObject(wrappedValue: MovieDetailViewModel(networkService: networkService))
+    }
     
     var body: some View {
         ZStack {

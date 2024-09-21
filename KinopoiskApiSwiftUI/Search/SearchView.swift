@@ -8,8 +8,15 @@
 import SwiftUI
 
 struct SearchView: View {
-    @StateObject private var viewModel = SearchViewModel()
+    @StateObject private var viewModel: SearchViewModel
     @EnvironmentObject var router: Router
+    
+    private let networkService: NetworkServiceProtocol
+    
+    init(networkService: NetworkService) {
+        self.networkService = networkService
+        _viewModel = StateObject(wrappedValue: SearchViewModel(networkService: networkService))
+    }
     
     var body: some View {
         NavigationStack(path: $router.path) {
@@ -50,7 +57,7 @@ struct SearchView: View {
             .navigationDestination(for: MovieRoute.self) { route in
                 switch route {
                 case .movieDetail(let movie):
-                    MovieDetailView(movie: movie)
+                    MovieDetailView(movie: movie, networkService: networkService)
                 }
             }
             .onTapGesture {

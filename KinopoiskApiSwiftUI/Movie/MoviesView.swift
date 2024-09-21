@@ -12,9 +12,12 @@ struct MoviesView: View {
     @StateObject private var viewModel: MoviesViewModel
     @EnvironmentObject var router: Router
     @EnvironmentObject var alertManager: AlertManager
-
-    init() {
-        _viewModel = StateObject(wrappedValue: MoviesViewModel(context: PersistenceController.shared.container.viewContext))
+    
+    private let networkService: NetworkServiceProtocol
+    
+    init(networkService: NetworkServiceProtocol) {
+        self.networkService = networkService
+        _viewModel = StateObject(wrappedValue: MoviesViewModel(context: PersistenceController.shared.container.viewContext, networkService: networkService))
     }
 
     var body: some View {
@@ -40,7 +43,7 @@ struct MoviesView: View {
             .navigationDestination(for: MovieRoute.self) { route in
                 switch route {
                 case .movieDetail(let movie):
-                    MovieDetailView(movie: movie) 
+                    MovieDetailView(movie: movie, networkService: networkService)
                 }
             }
             .alert(isPresented: $alertManager.showAlert) {

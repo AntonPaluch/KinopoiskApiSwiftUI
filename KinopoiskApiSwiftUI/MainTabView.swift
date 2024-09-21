@@ -8,14 +8,16 @@
 import SwiftUI
 
 struct MainTabView: View {
+    let networkService: NetworkService
+    
     var body: some View {
         TabView {
-            MoviesView()
+            MoviesView(networkService: networkService)
                 .tabItem {
                     Image(systemName: "film")
                     Text(Texts.movies)
                 }
-            SearchView()
+            SearchView(networkService: networkService)
                 .tabItem {
                     Image(systemName: "magnifyingglass")
                     Text(Texts.search)
@@ -27,8 +29,4 @@ struct MainTabView: View {
         static let movies = "Фильмы"
         static let search = "Поиск"
     }
-}
-
-#Preview {
-    MainTabView()
 }

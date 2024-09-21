@@ -14,13 +14,15 @@ class MovieDetailViewModel: ObservableObject {
     @Published var isLoading = false
     @Published var hasInternetConnection = true
     
-    private let networkService = NetworkService()
+    private let networkService: NetworkServiceProtocol
     private let monitor = NWPathMonitor()
     private let queue = DispatchQueue(label: "Monitor")
     
-    init() {
+    init(networkService: NetworkServiceProtocol) {
+        self.networkService = networkService
         startMonitoringNetwork()
     }
+    
     
     func fetchMovieDetails(id: Int) async {
         guard hasInternetConnection else { return }

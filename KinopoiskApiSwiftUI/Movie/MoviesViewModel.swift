@@ -20,9 +20,11 @@ class MoviesViewModel: ObservableObject {
     private let queue = DispatchQueue(label: "Monitor")
     
     private var viewContext: NSManagedObjectContext
+    private let networkService: NetworkServiceProtocol
     
-    init(context: NSManagedObjectContext) {
+    init(context: NSManagedObjectContext, networkService: NetworkServiceProtocol) {
         self.viewContext = context
+        self.networkService = networkService
         startMonitoringNetwork()
         Task {
             await loadMovies()
@@ -31,8 +33,6 @@ class MoviesViewModel: ObservableObject {
     
     @MainActor
     func loadMovies() async {
-        let networkService = NetworkService()
-        
         guard !isLoading else { return }
         isLoading = true
         

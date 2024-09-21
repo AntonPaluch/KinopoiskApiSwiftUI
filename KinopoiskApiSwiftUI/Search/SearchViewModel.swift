@@ -14,10 +14,11 @@ class SearchViewModel: ObservableObject {
     @Published var isLoading = false
     @Published var currentPage = 1
     @Published var canLoadMorePages = true
+    
+    private let networkService: NetworkServiceProtocol
 
-    private var networkService = NetworkService()
-
-    init() {
+    init(networkService: NetworkServiceProtocol) {
+        self.networkService = networkService
         Task {
             await monitorSearchTextChanges()
         }
