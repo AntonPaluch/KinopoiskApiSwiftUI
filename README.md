@@ -4,13 +4,13 @@
 
 ## 🎥 Видео-демонстрация
 
-### Видео 1
+### Видео общицй функционал
 [![Movie Search App Demo](https://img.youtube.com/vi/Xaq4JH0iHtY/0.jpg)](https://youtu.be/Xaq4JH0iHtY)
 
-### Видео 2
+### Видео кеширование
 [![Search Feature Demo](https://img.youtube.com/vi/iDCuW58B9MA/0.jpg)](https://youtu.be/iDCuW58B9MA)
 
-### Видео 3
+### Видео refreshable
 [![Movie Detail Demo](https://img.youtube.com/vi/VsZHG15TU1Q/0.jpg)](https://youtu.be/VsZHG15TU1Q)
 
 ## 🏗 Архитектура
